@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import { FaMicrosoft, FaLinkedin } from "react-icons/fa";
 // import { DiGoogleCloudPlatform } from "react-icons/di";
-import Genai from "../assets/Genai.png";
+import Genai from "../assets/GenAI.png";
 import intogenai from "../assets/intogenai.png"; // Placeholder for the second badge
 import { SiGooglecloud } from "react-icons/si";
 
