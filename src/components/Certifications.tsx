@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaMicrosoft, FaLinkedin } from "react-icons/fa";
+// import { FaMicrosoft, FaLinkedin } from "react-icons/fa";
 // import { DiGoogleCloudPlatform } from "react-icons/di";
 import Genai from "../assets/Genai.png";
 import intogenai from "../assets/intogenai.png"; // Placeholder for the second badge
