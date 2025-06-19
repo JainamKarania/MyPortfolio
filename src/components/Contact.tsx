@@ -1,17 +1,20 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FaGithub, FaLinkedin, FaExternalLinkAlt } from "react-icons/fa";
+import { SiLeetcode, SiGooglecloud } from "react-icons/si";
+import { GoMail } from "react-icons/go";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (formRef.current) {
+    if (linksRef.current) {
       gsap.fromTo(
-        formRef.current,
+        linksRef.current,
         { opacity: 0, y: 100 },
         {
           opacity: 1,
@@ -19,7 +22,7 @@ const Contact = () => {
           duration: 1,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: formRef.current,
+            trigger: linksRef.current,
             start: "top 80%",
           },
         }
@@ -36,55 +39,77 @@ const Contact = () => {
       <div className="absolute inset-0 bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px]" />
 
       <div className="max-w-3xl mx-auto text-center relative z-10">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6">Get in Touch</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-6">Let’s Connect</h2>
         <p className="text-gray-300 mb-12">
-          Have a question or want to work together? Let’s connect.
+          Feel free to reach out or follow me on the platforms below.
         </p>
 
-        <form
-          ref={formRef}
-          className="space-y-6 bg-[#1a1a1a]/70 p-8 rounded-2xl backdrop-blur-lg shadow-xl"
+        <div
+          ref={linksRef}
+          className="flex flex-wrap justify-center gap-6 items-center mb-12"
         >
-          <div>
-            <label className="block mb-2 text-left text-sm font-medium">
-              Name
-            </label>
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full px-4 py-3 bg-[#111] border border-gray-700 rounded-xl focus:outline-none focus:border-white"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-2 text-left text-sm font-medium">
-              Email
-            </label>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              className="w-full px-4 py-3 bg-[#111] border border-gray-700 rounded-xl focus:outline-none focus:border-white"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-2 text-left text-sm font-medium">
-              Message
-            </label>
-            <textarea
-              placeholder="Tell me what’s on your mind..."
-              rows={5}
-              className="w-full px-4 py-3 bg-[#111] border border-gray-700 rounded-xl focus:outline-none focus:border-white resize-none"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-3 bg-white text-black rounded-xl font-semibold hover:bg-gray-200 transition-colors"
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/jainam-karania/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
           >
-            Send Message
-          </button>
-        </form>
+            <FaLinkedin className="text-blue-400 text-xl" />
+            LinkedIn
+          </a>
+
+          {/* GitHub */}
+          <a
+            href="https://github.com/JainamKarania"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
+          >
+            <FaGithub className="text-gray-300 text-xl" />
+            GitHub
+          </a>
+
+          {/* Google Cloud */}
+          <a
+            href="https://www.cloudskillsboost.google/public_profiles/b61436a3-89ab-4080-ab83-9372a7ecf586"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
+          >
+            <SiGooglecloud className="text-yellow-300 text-xl" />
+            Google Cloud Skills Boost
+          </a>
+
+          {/* Leetcode */}
+          <a
+            href="https://leetcode.com/u/JainamKarania/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
+          >
+            <SiLeetcode className="text-orange-400 text-xl" />
+            LeetCode
+          </a>
+
+          {/* Email */}
+          <a
+            href="mailto:your.jainamkarania05@gmail.com"
+            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
+          >
+            <GoMail className="text-xl" />
+            jainamkarania05@gmail.com
+          </a>
+        </div>
+
+        {/* Hire Me Button */}
+        <a
+          href="mailto:your.email@example.com"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-black font-semibold rounded-xl transition"
+        >
+          <FaExternalLinkAlt />
+          Hire Me
+        </a>
       </div>
     </section>
   );
