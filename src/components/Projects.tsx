@@ -4,9 +4,10 @@ import g_thumb from "../assets/g_thumb.png";
 import pc from "../assets/pure.png";
 import z_thumb from "../assets/z_thumb.png";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaReact, FaNodeJs, FaJs, FaExternalLinkAlt } from "react-icons/fa";
+import { FaReact, FaJs, FaExternalLinkAlt } from "react-icons/fa";
 import { SiTailwindcss, SiTypescript } from "react-icons/si";
-import { FaWebflow } from "react-icons/fa6";
+import { FaPython, FaWebflow } from "react-icons/fa6";
+import { MdPin, MdSpeed } from "react-icons/md";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,16 +26,18 @@ const projects: Project[] = [
     description: [
       "Built a responsive AI chatbot interface inspired by Google Gemini.",
       "Integrated dynamic prompts and streamed responses.",
-      "Backend connected using Node.js & Express for OpenAI API handling.",
+      "Backend powered by Python with OpenAI API.",
       "Styled with Tailwind and TypeScript for scalable development.",
     ],
     techStack: [
       { name: "React", icon: <FaReact /> },
       { name: "TypeScript", icon: <SiTypescript /> },
       { name: "Tailwind", icon: <SiTailwindcss /> },
-      { name: "Node.js", icon: <FaNodeJs /> },
+      { name: "Python", icon: <FaPython /> },
+      { name: "OpenAI API", icon: <MdPin /> },
+      { name: "FastAPI", icon: <MdSpeed /> },
     ],
-    liveLink: "https://g-force-rose.vercel.app/",
+    liveLink: "https://gemini-clone-six-red.vercel.app/",
   },
   {
     name: "PureConnectt Portal",
@@ -114,8 +117,7 @@ const Projects = () => {
       <div className="container max-w-7xl mx-auto px-4 relative z-10">
         <h2
           ref={headingRef}
-          className="text-xl md:text-4xl font-bold text-white mb-12"
-        >
+          className="text-xl md:text-4xl font-bold text-white mb-12">
           My Projects
         </h2>
 
