@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState, type JSX } from "react";
 import gsap from "gsap";
 import g_thumb from "../assets/g_thumb.png";
-import pc from "../assets/pure.png";
+// import pc from "../assets/pure.png";
 import z_thumb from "../assets/z_thumb.png";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaReact, FaJs, FaExternalLinkAlt } from "react-icons/fa";
-import { SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiJavascript, SiTailwindcss, SiTypescript } from "react-icons/si";
 import { FaPython, FaWebflow } from "react-icons/fa6";
 import { MdPin, MdSpeed } from "react-icons/md";
+import task from "../assets/task.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,7 +32,7 @@ const projects: Project[] = [
     ],
     techStack: [
       { name: "React", icon: <FaReact /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
+      { name: "JavaScript", icon: <SiJavascript /> },
       { name: "Tailwind", icon: <SiTailwindcss /> },
       { name: "Python", icon: <FaPython /> },
       { name: "OpenAI API", icon: <MdPin /> },
@@ -40,20 +41,18 @@ const projects: Project[] = [
     liveLink: "https://gemini-clone-six-red.vercel.app/",
   },
   {
-    name: "PureConnectt Portal",
-    image: pc,
+    name: "Task Asistant",
+    image: task,
     description: [
-      "Job portal with integrated PureConnect Score for trust-building.",
-      "Designed for consultancies and job seekers with dashboards.",
-      "Used React with state-driven UI updates.",
-      "Mobile-friendly, clean layout styled with Tailwind CSS.",
+      "A full-stack application that manages daily tasks and tracks user information with daily remainders of upcoming tasks, pending tasks and completed tasks with their work history as well.",
+      "This application has a 50% less reload time compared to other Task Applications and a smooth user experience using - Python ,Fast API ,ReactJS, TypeScript, Tailwind CSS, GSAP, SQL, etc.",
     ],
     techStack: [
       { name: "React", icon: <FaReact /> },
-      { name: "JavaScript", icon: <FaJs /> },
+      { name: "TypeScript", icon: <FaJs /> },
       { name: "Tailwind", icon: <SiTailwindcss /> },
     ],
-    liveLink: "https://www.pureconnectt.com/",
+    liveLink: "https://github.com/JainamKarania/TaskAI_Assitant",
   },
   {
     name: "Zebra Learn",
