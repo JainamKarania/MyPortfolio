@@ -1,203 +1,279 @@
 import { useEffect, useRef, useState, type JSX } from "react";
 import gsap from "gsap";
-import g_thumb from "../assets/g_thumb.png";
-// import pc from "../assets/pure.png";
-import z_thumb from "../assets/z_thumb.png";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaReact, FaJs, FaExternalLinkAlt } from "react-icons/fa";
+import { FaReact, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { SiJavascript, SiTailwindcss, SiTypescript } from "react-icons/si";
 import { FaPython, FaWebflow } from "react-icons/fa6";
-import { MdPin, MdSpeed } from "react-icons/md";
+import { MdAnimation, MdSpeed } from "react-icons/md";
+import hand from "../assets/hand.jpg";
+import electric from "../assets/electric.jfif";
+import g_thumb from "../assets/g_thumb.png";
+import z_thumb from "../assets/z_thumb.png";
 import task from "../assets/task.jpg";
+import wonder from "../assets/wonder.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
+type Category = "personal" | "webflow" | "ai";
+
 interface Project {
+  id: string;
   name: string;
   image: string;
+  category: Category;
   techStack: { name: string; icon: JSX.Element }[];
-  description: string[];
-  liveLink: string;
+  short: string;
+  liveLink?: string;
+  githubLink?: string;
 }
 
 const projects: Project[] = [
   {
+    id: "gemini",
     name: "Gemini Clone (AI Agent)",
     image: g_thumb,
-    description: [
-      "Built a responsive AI chatbot interface inspired by Google Gemini.",
-      "Integrated dynamic prompts and streamed responses.",
-      "Backend powered by Python with OpenAI API.",
-      "Styled with Tailwind and TypeScript for scalable development.",
-    ],
+    category: "ai",
+    short: "Responsive AI chatbot with streamed responses & FastAPI backend.",
     techStack: [
       { name: "React", icon: <FaReact /> },
       { name: "JavaScript", icon: <SiJavascript /> },
       { name: "Tailwind", icon: <SiTailwindcss /> },
       { name: "Python", icon: <FaPython /> },
-      { name: "OpenAI API", icon: <MdPin /> },
       { name: "FastAPI", icon: <MdSpeed /> },
     ],
     liveLink: "https://gemini-clone-six-red.vercel.app/",
+    githubLink: "https://github.com/JainamKarania/gemini-clone",
   },
   {
-    name: "Task Asistant",
+    id: "taskai",
+    name: "Task Assistant",
     image: task,
-    description: [
-      "A full-stack application that manages daily tasks and tracks user information with daily remainders of upcoming tasks, pending tasks and completed tasks with their work history as well.",
-      "This application has a 50% less reload time compared to other Task Applications and a smooth user experience using - Python ,Fast API ,ReactJS, TypeScript, Tailwind CSS, GSAP, SQL, etc.",
-    ],
+    category: "personal",
+    short:
+      "Full-stack Task manager with reminders, history, and optimized UX (50% faster).",
     techStack: [
       { name: "React", icon: <FaReact /> },
-      { name: "TypeScript", icon: <FaJs /> },
+      { name: "TypeScript", icon: <SiTypescript /> },
       { name: "Tailwind", icon: <SiTailwindcss /> },
     ],
     liveLink: "https://github.com/JainamKarania/TaskAI_Assitant",
+    githubLink: "https://github.com/JainamKarania/TaskAI_Assitant",
   },
   {
+    id: "zebra",
     name: "Zebra Learn",
     image: z_thumb,
-    description: [
-      "Dive into an immersive digital experience with our single-page website, meticulously crafted on the Webflow platform.",
-      "Seamlessly designed and optimized, every scroll and click guides you through a captivating journey.",
-      "Utilizing Webflow's intuitive tools, we've brought dynamic animations to life, ensuring an engaging user interaction.",
-      "With Webflow's robust features, we've created a website that not only captivates but also inspires action, inviting you to explore and engage with unparalleled ease.",
-    ],
+    category: "webflow",
+    short: "Single-page Webflow site with polished animations and UX.",
     techStack: [
       { name: "Webflow", icon: <FaWebflow /> },
       { name: "TypeScript", icon: <SiTypescript /> },
     ],
     liveLink: "https://learning-site-66c1f3.webflow.io/",
   },
+  {
+    id: "harrison",
+    name: "Harrison's Webflow Site",
+    image: electric,
+    category: "webflow",
+    short: "Elegant Webflow site with smooth animations and responsive design.",
+    techStack: [
+      { name: "Webflow", icon: <FaWebflow /> },
+      { name: "TypeScript", icon: <SiTypescript /> },
+    ],
+    liveLink: "https://www.harrisonforbeselectrical.com/",
+  },
+  {
+      id: "woi",
+      name: "Wonders of India",
+      image: wonder,
+      category: "personal",
+      short: "A travel blog website showcasing India's top destinations.",
+      techStack: [
+        { name: "React", icon: <FaReact /> },
+        { name: "JavaScript", icon: <SiJavascript /> },
+        { name: "Tailwind", icon: <SiTailwindcss /> },
+        {name: "GSAP", icon: <MdAnimation />},
+      ],
+      liveLink: "https://wonders-of-india.vercel.app/",
+      githubLink: "https://github.com/JainamKarania/Wonders-of-India"
+  },
+  {
+      id: "personality-prediction",
+      name: "Personality Prediction System based on Graphology Using ML",
+      image: hand,
+      category: "ai",
+      short: "ML-based personality prediction from handwritten text with 90% accuracy.",
+      techStack: [
+        { name: "Python", icon: <FaPython /> },
+        { name: "Machine Learning", icon: <MdSpeed /> },
+      ],
+      githubLink: "",
+    },
+];
+
+const TAB_LIST: { key: "all" | Category; label: string }[] = [
+  { key: "all", label: "All Projects" },
+  { key: "personal", label: "Personal Projects" },
+  { key: "webflow", label: "Webflow Projects" },
+  { key: "ai", label: "AI/ML Projects" },
 ];
 
 const Projects = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const [selectedProject, setSelectedProject] = useState<Project>(projects[0]);
+  const [activeTab, setActiveTab] = useState<"all" | Category>("all");
+  const gridRef = useRef<HTMLDivElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+
+  const filtered =
+    activeTab === "all"
+      ? projects
+      : projects.filter((p) => p.category === activeTab);
 
   useEffect(() => {
-    if (sectionRef.current) {
-      gsap.to(sectionRef.current, {
-        y: -100,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }
-
     if (headingRef.current) {
       gsap.fromTo(
         headingRef.current,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
-          delay: 0.2,
+          duration: 0.7,
           ease: "power3.out",
           scrollTrigger: {
             trigger: headingRef.current,
-            start: "top 80%",
+            start: "top 85%",
           },
         }
       );
     }
-  }, [selectedProject]);
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray(".project-card");
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 30, scale: 0.98 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
+        }
+      );
+    }, gridRef);
+
+    return () => ctx.revert();
+  }, [activeTab]);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-20 relative z-10">
-      <div className="absolute inset-0 bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px] z-0" />
+    <section id="projects" className="py-20 relative z-10">
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-black bg-[radial-gradient(#00fff022_1px,transparent_1px)] [background-size:24px_24px] z-0" />
 
       <div className="container max-w-7xl mx-auto px-4 relative z-10">
         <h2
           ref={headingRef}
-          className="text-xl md:text-4xl font-bold text-white mb-12">
+          className="text-xl md:text-4xl font-bold text-white mb-10"
+        >
           My Projects
         </h2>
 
-        <div className="flex flex-col md:flex-row gap-10">
-          {/* Left Side */}
-          <div className="flex-1 space-y-6">
-            <div className="relative rounded-xl overflow-hidden shadow-lg group border-t-2 border-r-2 border-l-2 p-1 border-cyan-600">
-              <img
-                src={selectedProject.image}
-                alt={selectedProject.name}
-                className="w-full object-cover h-60 transition-transform duration-300 group-hover:scale-105"
-              />
+        {/* Tabs */}
+        <div className="flex flex-wrap gap-3 mb-8">
+          {TAB_LIST.map((t) => {
+            const active = activeTab === t.key;
+            return (
+              <button
+                key={t.key}
+                onClick={() => setActiveTab(t.key as any)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all backdrop-blur-md border
+                  ${
+                    active
+                      ? "bg-cyan-400/20 text-cyan-300 border-cyan-500/30"
+                      : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
+                  }`}
+              >
+                {t.label}
+              </button>
+            );
+          })}
+        </div>
 
-              {/* Overlay at Bottom */}
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="absolute bottom-0 left-0 w-full px-4 py-3 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-between items-center">
-                <h3 className="text-white text-sm font-semibold truncate">
-                  {selectedProject.name}
-                </h3>
-                <a
-                  href={selectedProject.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white text-xs flex items-center gap-1 hover:underline"
-                >
-                  <FaExternalLinkAlt className="text-xs" />
-                  Live
-                </a>
-              </div>
-            </div>
-
-            
-            <div className="border border-cyan-600"></div>
-            <h4 className="text-xl font-bold">All Projects</h4>
-            <div className="flex gap-8 p-3 overflow-x-auto pb-2">
-              {projects.map((project, index) => (
+        {/* Project Grid */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {filtered.map((project) => (
+            <div
+              key={project.id}
+              className="project-card relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-xl shadow-[0_0_20px_rgba(0,255,255,0.15)] hover:shadow-[0_0_25px_rgba(0,255,255,0.3)] hover:scale-[1.02] transition-all duration-500"
+            >
+              {/* Image */}
+              <div className="relative h-48 w-full overflow-hidden">
                 <img
-                  key={index}
                   src={project.image}
                   alt={project.name}
-                  className={`w-40 h-24 object-cover rounded-md border cursor-pointer transition duration-300 transform ${
-                    selectedProject.name === project.name
-                      ? "border-cyan-400 scale-110"
-                      : "border-gray-600 scale-100"
-                  }`}
-                  onClick={() => setSelectedProject(project)}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-              ))}
-            </div>
-          </div>
-
-          {/* Right Side */}
-          <div className="flex-1 space-y-6 p-6 bg-transparent shadow-xl shadow-sky-800/30 border border-sky-700/30 backdrop-blur-sm rounded-2xl">
-            <button className="px-3 py-1 bg-cyan-400/20 text-cyan-300 text-sm font-semibold rounded-full uppercase tracking-wide hover:bg-cyan-400 hover:text-white transition">
-              My Work
-            </button>
-
-            <h3 className="text-2xl font-bold text-white">
-              {selectedProject.name}
-            </h3>
-
-            <ul className="list-disc pl-5 text-gray-300 space-y-2 text-base md:text-lg">
-              {selectedProject.description.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
-            <h3 className="text-2xl font-bold">Tech Stack</h3>
-            <div className="flex flex-wrap gap-4">
-              {/* <h3 className="text-2xl">Tech Stack</h3> */}
-              {selectedProject.techStack.map((tech, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm"
-                >
-                  <span className="text-xl">{tech.icon}</span>
-                  {tech.name}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                <div className="absolute top-3 right-3 flex gap-2">
+                  {project.githubLink && (
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 bg-black/40 backdrop-blur-sm rounded-lg text-white text-sm hover:bg-black/70 transition"
+                      title="GitHub"
+                    >
+                      <FaGithub />
+                    </a>
+                  )}
+                  {project.liveLink && (
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 bg-black/40 backdrop-blur-sm rounded-lg text-white text-sm hover:bg-black/70 transition"
+                      title="Live"
+                    >
+                      <FaExternalLinkAlt />
+                    </a>
+                  )}
                 </div>
-              ))}
+              </div>
+
+              {/* Content */}
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white">
+                  {project.name}
+                </h3>
+                <p className="text-gray-300 text-sm mt-2">{project.short}</p>
+
+                {/* Tech Stack - shows fully, fades slightly on hover */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.techStack.map((t, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-1 text-xs bg-white/10 border border-white/10 rounded-md px-2 py-1 text-cyan-200 hover:bg-white/20 transition"
+                      title={t.name}
+                    >
+                      <span className="text-sm">{t.icon}</span>
+                      <span className="hidden sm:inline">{t.name}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Category tag */}
+                <div className="mt-4">
+                  <span className="inline-block px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-300 text-xs font-semibold border border-cyan-500/30">
+                    {project.category.toUpperCase()}
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -111,12 +111,10 @@ const About = () => {
               <h2 className="text-2xl font-bold text-cyan-300">
                 Jainam Karania
               </h2>
-              <p className="text-sm text-gray-300">
-                Frontend Engineer | AI Enthusiast
-              </p>
+              <p className="text-sm text-gray-300">AI Enthusiast</p>
               <div className="flex items-center justify-center gap-2 mt-1 text-sm text-gray-200">
                 <FaLocationDot className="text-cyan-400 text-lg" />
-                <span>Ankleshwar, Gujarat, India</span>
+                <span>Surat, Gujarat, India</span>
               </div>
             </div>
 
@@ -175,20 +173,20 @@ const About = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => setActiveTab("summary")}
-                className={`px-3 py-1 rounded-full text-sm font-semibold uppercase tracking-wide transition ${
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all backdrop-blur-md border ${
                   activeTab === "summary"
-                    ? "bg-cyan-400 text-white"
-                    : "bg-cyan-400/20 text-cyan-300 hover:bg-cyan-400 hover:text-white"
+                    ? "bg-cyan-400/20 text-cyan-300 border-cyan-500/30"
+                    : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
                 }`}
               >
                 Profile Summary
               </button>
               <button
                 onClick={() => setActiveTab("experience")}
-                className={`px-3 py-1 rounded-full text-sm font-semibold uppercase tracking-wide transition ${
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all backdrop-blur-md border ${
                   activeTab === "experience"
-                    ? "bg-cyan-400 text-white"
-                    : "bg-cyan-400/20 text-cyan-300 hover:bg-cyan-400 hover:text-white"
+                    ? "bg-cyan-400/20 text-cyan-300 border-cyan-500/30"
+                    : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
                 }`}
               >
                 My Experience
@@ -196,25 +194,11 @@ const About = () => {
             </div>
 
             {activeTab === "summary" && (
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <h3 className="text-2xl font-bold">Introduction</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-200 text-lg">
-                  <li>
-                    Frontend Engineer with a strong passion for building modern
-                    web applications.
-                  </li>
-                  <li>
-                    Expert in React, Tailwind CSS, and UI animation libraries
-                    such as GSAP.
-                  </li>
-                  <li>
-                    Proven track record of delivering responsive and intuitive
-                    user experiences.
-                  </li>
-                  <li>
-                    Quick learner with a collaborative mindset and design
-                    thinking approach.
-                  </li>
+                <ul className="list-disc list-inside space-y-1 text-gray-200 text-lg">
+                  I'm a curious mind actively looking for an opportunity into Software Development as well as in AI/ML domain. I've immersed myself in Generative AI, building tools like
+                  AI powered web applications and AI Agents using LLM’s & GenAI SDKs.
                 </ul>
                 <div className="mt-10 space-y-4">
                   <h3
@@ -271,7 +255,7 @@ const About = () => {
                     />
                     <div className="flex flex-col gap-1">
                       <h4 className="text-xl font-semibold">
-                        Lead Frontend Developer | PureConnectt Technologies
+                        Frontend Developer | PureConnectt Technologies
                       </h4>
                       <p className="text-sm text-gray-300">
                         Ankleshwar | On-site | Oct 2024 – Feb 2025
@@ -307,7 +291,9 @@ const About = () => {
                       className="w-14 h-14 rounded-xl object-contain border border-cyan-400 p-1 bg-white"
                     />
                     <div className="flex flex-col gap-1">
-                      <h4 className="text-xl font-semibold">Webflow & Frontend Developer | TheCSSAgency</h4>
+                      <h4 className="text-xl font-semibold">
+                        Webflow & Frontend Developer | TheCSSAgency
+                      </h4>
                       {/* <h4 className="text-xl font-semibold"></h4> */}
                       <p className="text-sm text-gray-300">
                         Surat | On-site | Oct 2023 – Feb 2024
@@ -316,13 +302,16 @@ const About = () => {
                   </div>
                   <ul className="list-disc list-inside space-y-3 text-gray-200 text-base ml-2">
                     <li>
-                      Developed responsive websites using Webflow and no-code tools, reducing bounce rates by 30%.
+                      Developed responsive websites using Webflow and no-code
+                      tools, reducing bounce rates by 30%.
                     </li>
                     <li>
-                      Integrated smooth animations and interactivity, enhancing session durations and user engagement.
+                      Integrated smooth animations and interactivity, enhancing
+                      session durations and user engagement.
                     </li>
                     <li>
-                      Delivered pixel-perfect UI/UX for multiple client-facing sites using agile methodology.
+                      Delivered pixel-perfect UI/UX for multiple client-facing
+                      sites using agile methodology.
                     </li>
                   </ul>
                 </div>

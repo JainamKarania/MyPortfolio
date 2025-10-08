@@ -80,9 +80,9 @@ const Hero = () => {
 
         <h1
           ref={headingRef}
-          className="text-white text-4xl md:text-6xl font-bold max-w-3xl mx-auto"
+          className="text-white text-4xl md:text-6xl font-bold max-w-xl mx-auto"
         >
-          Hello Mate, Welcome to my Portfolio
+          Welcome to my Portfolio
         </h1>
 
         <p
