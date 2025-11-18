@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type JSX } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaReact, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import { SiJavascript, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiJavascript, SiModal, SiNumpy, SiPandas, SiTailwindcss, SiTypescript } from "react-icons/si";
 import { FaPython, FaWebflow } from "react-icons/fa6";
 import { MdAnimation, MdSpeed } from "react-icons/md";
 import hand from "../assets/hand.jpg";
@@ -11,6 +11,8 @@ import g_thumb from "../assets/g_thumb.png";
 import z_thumb from "../assets/z_thumb.png";
 import task from "../assets/task.jpg";
 import wonder from "../assets/wonder.jpg";
+import finance from "../assets/finance.avif";
+import img_g from "../assets/img_g.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,8 +31,37 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: "finance",
+    name: "Financial Report Summarization & KPI Extraction using NLP.",
+    image: finance,
+    category: "ai",
+    short: "NLP model to summarize financial reports and extract key KPIs.",
+    techStack: [
+      { name: "Python", icon: <FaPython /> },
+      { name: "NLP", icon: <MdSpeed /> },
+      { name: "Machine Learning", icon: <MdSpeed /> },
+      { name: "Pandas", icon: <SiPandas /> },
+      { name: "NumPy", icon: <SiNumpy /> },
+      { name: "Model Evaluation", icon: <SiModal /> },
+    ]
+  },
+  {
+    id:"image-generator",
+    name: "Imagify",
+    image: img_g,
+    category: "ai",
+    short: "AI-powered image generator use to create 2D and 3D images.",
+    techStack: [
+      { name: "React", icon: <FaReact /> },
+      { name: "TypeScript", icon: <SiTypescript /> },
+      { name: "Tailwind", icon: <SiTailwindcss /> },  
+      { name: "Python", icon: <FaPython /> },
+      { name: "FastAPI", icon: <MdSpeed /> },
+    ],
+  },
+  {
     id: "gemini",
-    name: "Gemini Clone (AI Agent)",
+    name: "GForce AI",
     image: g_thumb,
     category: "ai",
     short: "Responsive AI chatbot with streamed responses & FastAPI backend.",

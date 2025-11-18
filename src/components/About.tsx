@@ -114,7 +114,7 @@ const About = () => {
               <p className="text-sm text-gray-300">AI Enthusiast</p>
               <div className="flex items-center justify-center gap-2 mt-1 text-sm text-gray-200">
                 <FaLocationDot className="text-cyan-400 text-lg" />
-                <span>Surat, Gujarat, India</span>
+                <span>Bangalore, Karnataka, India</span>
               </div>
             </div>
 
@@ -197,7 +197,7 @@ const About = () => {
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold">Introduction</h3>
                 <ul className="list-disc list-inside space-y-1 text-gray-200 text-lg">
-                  I'm a curious mind actively looking for an opportunity into Software Development as well as in AI/ML domain. I've immersed myself in Generative AI, building tools like
+                  I'm a curious mind actively looking for an opportunity in AI/ML domain. I've immersed myself in Generative AI, building tools like
                   AI powered web applications and AI Agents using LLM’s & GenAI SDKs.
                 </ul>
                 <div className="mt-10 space-y-4">
