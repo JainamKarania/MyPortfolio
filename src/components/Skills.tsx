@@ -1,118 +1,204 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import {
   FaReact,
-  // FaNodeJs,
   FaPython,
-  // FaHtml5,
-  // FaCss3Alt,
   FaJs,
   FaDatabase,
 } from "react-icons/fa";
-import { SiGooglegemini, SiMysql, SiPandas, SiScikitlearn, SiStreamlit, SiTensorflow, SiTypescript } from "react-icons/si";
+import {
+  SiGooglegemini,
+  SiMysql,
+  SiPandas,
+  SiScikitlearn,
+  SiStreamlit,
+  SiTensorflow,
+  SiTypescript,
+} from "react-icons/si";
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 import { MdAnimation } from "react-icons/md";
 import { FaWebflow } from "react-icons/fa6";
 import { FiFramer } from "react-icons/fi";
+import type { JSX } from "react/jsx-runtime";
 
 const Skills = () => {
-  const rowRef = useRef<HTMLDivElement>(null);
-  const marqueeTween = useRef<gsap.core.Tween | null>(null);
-  const [reverse, setReverse] = useState(false);
+  const row1Ref = useRef<HTMLUListElement>(null);
+  const row2Ref = useRef<HTMLUListElement>(null);
 
-  const skills = [
+  const tween1 = useRef<gsap.core.Tween | null>(null);
+  const tween2 = useRef<gsap.core.Tween | null>(null);
+
+  // Row 1 → Frontend
+  const row1Skills = [
     { name: "React", icon: <FaReact /> },
-    { name: "Next", icon: <RiNextjsFill className="text-cyan-400" /> },
-    { name: "Tailwind CSS", icon: <RiTailwindCssFill className="text-cyan-400" /> },
-    { name: "Webflow", icon: <FaWebflow className="text-cyan-400" /> },
-    { name: "Framer", icon: <FiFramer className="text-cyan-400" /> },
-    { name: "JavaScript", icon: <FaJs className="text-cyan-400" /> },
-    { name: "TypeScript", icon: <SiTypescript className="text-cyan-400" /> },
-    { name: "SQL", icon: <SiMysql className="text-cyan-400" /> },
-    { name: "Python", icon: <FaPython className="text-cyan-400" /> },
-    { name: "Pandas", icon: <SiPandas className="text-cyan-400" /> },
-    { name: "Tensorflow", icon: <SiTensorflow className="text-cyan-400" /> },
-    { name: "Scikit-learn", icon: <SiScikitlearn className="text-cyan-400" /> },
-    { name: "Streamlit", icon: <SiStreamlit className="text-cyan-400" /> },
-    { name: "LLM'S", icon: <SiGooglegemini className="text-cyan-400" /> },
-    { name: "GSAP", icon: <MdAnimation className="text-cyan-400" /> },
-    { name: "SQL", icon: <FaDatabase className="text-cyan-400" /> },
+    { name: "Next.js", icon: <RiNextjsFill /> },
+    { name: "Tailwind CSS", icon: <RiTailwindCssFill /> },
+    { name: "Webflow", icon: <FaWebflow /> },
+    { name: "Framer Motion", icon: <FiFramer /> },
+    { name: "JavaScript", icon: <FaJs /> },
+    { name: "TypeScript", icon: <SiTypescript /> },
+    { name: "GSAP", icon: <MdAnimation /> },
   ];
 
-  const extendedSkills = [...skills, ...skills]; // Prevent space in flow
+  // Row 2 → Backend / AI (NO repetition with row1)
+  const row2Skills = [
+    { name: "Python", icon: <FaPython /> },
+    { name: "MySQL", icon: <SiMysql /> },
+    { name: "SQL", icon: <FaDatabase /> },
+    { name: "Pandas", icon: <SiPandas /> },
+    { name: "TensorFlow", icon: <SiTensorflow /> },
+    { name: "Scikit-Learn", icon: <SiScikitlearn /> },
+    { name: "Streamlit", icon: <SiStreamlit /> },
+    { name: "LLMs", icon: <SiGooglegemini /> },
+  ];
+
+  const duplicatedRow1 = [...row1Skills, ...row1Skills];
+  const duplicatedRow2 = [...row2Skills, ...row2Skills];
 
   useEffect(() => {
-    marqueeTween.current = gsap.to(rowRef.current, {
-      xPercent: -50,
-      ease: "none",
-      repeat: -1,
-      duration: 20,
-    });
+    // Row 1 → Left infinite loop
+    tween1.current = gsap.fromTo(
+      row1Ref.current,
+      { xPercent: 0 },
+      {
+        xPercent: -50,
+        duration: 20,
+        ease: "none",
+        repeat: -1,
+      }
+    );
+
+    // Row 2 → Right infinite loop (opposite + slower by ~1s)
+    tween2.current = gsap.fromTo(
+      row2Ref.current,
+      { xPercent: -50 },
+      {
+        xPercent: 0,
+        duration: 21,
+        ease: "none",
+        repeat: -1,
+      }
+    );
 
     return () => {
-      marqueeTween.current?.kill();
+      tween1.current?.kill();
+      tween2.current?.kill();
     };
   }, []);
 
-  const handleHover = () => {
-    marqueeTween.current?.pause();
+  const pause = () => {
+    tween1.current?.pause();
+    tween2.current?.pause();
   };
 
-  const handleLeave = () => {
-    setReverse((prev) => !prev);
-
-    marqueeTween.current?.kill();
-
-    marqueeTween.current = gsap.to(rowRef.current, {
-      xPercent: reverse ? -50 : 0,
-      ease: "none",
-      repeat: -1,
-      duration: 20,
-    });
+  const resume = () => {
+    tween1.current?.resume();
+    tween2.current?.resume();
   };
+
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      headingRef.current,
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 85%",
+        },
+      }
+    );
+  }, []);
+
+  const SkillCard = ({ skill }: { skill: { name: string; icon: JSX.Element } }) => (
+    <li className="min-w-[140px] md:min-w-[180px]">
+      <figure className="border border-white/20 rounded-lg p-5 flex flex-col items-center justify-center gap-2 hover:border-white transition">
+        <div className="text-2xl md:text-3xl">{skill.icon}</div>
+        <figcaption className="text-sm md:text-base font-medium text-center">
+          {skill.name}
+        </figcaption>
+      </figure>
+    </li>
+  );
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-gray-900 via-slate-900 to-black">
-      <div
-        className="absolute inset-0 bg-black"
-        style={{
-          backgroundImage: "radial-gradient(#ffffff22 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-        }}
-      />
+    <section
+      aria-labelledby="skills-heading"
+      className="bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px] text-white py-12 overflow-hidden"
+    >
+      <header className="flex flex-col items-center justify-center mb-10">
+        <h4
+  ref={headingRef}
+  className="
+    relative inline-block group
+    text-white font-semibold text-sm md:text-base tracking-widest
+    border border-white/30 rounded-md px-5 py-2
+    cursor-pointer overflow-hidden
+    transition-all duration-300
+    hover:border-white mb-4
+  "
+>
+  <span className="relative z-10 group-hover:text-black transition">
+    TECH STACK
+  </span>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl md:text-6xl font-bold text-center mb-6 text-white">
-          Skills & Technologies
-        </h2>
-        <p className="text-lg md:text-xl text-center mb-12 text-gray-300">
-          Here are some of the skills and technologies I work with, showcasing my
-          expertise in both web development and data science.
-        </p>
+  <span
+    className="
+      absolute inset-0 bg-white
+      translate-y-full
+      transition-transform duration-300 ease-out
+      group-hover:translate-y-0
+    "
+  />
+</h4>
 
-        <div
-          onMouseEnter={handleHover}
-          onMouseLeave={handleLeave}
-          className="overflow-hidden"
-        >
-          <div
-            ref={rowRef}
-            className="flex w-max space-x-6"
-          >
-            {extendedSkills.map((skill, index) => (
-              <div
-                key={index}
-                className="bg-slate-800/50 p-6 rounded-xl shadow-lg backdrop-blur-sm border border-sky-600/30 flex flex-col items-center space-y-3 min-w-[160px] transition hover:scale-105"
-              >
-                <div className="text-[2.75rem] text-cyan-400 drop-shadow-[0_0_6px_currentColor] animate-glowRotate">
-                  {skill.icon}
-                </div>
-                <h3 className="text-white text-center text-lg font-semibold">
-                  {skill.name}
-                </h3>
-              </div>
+<h2
+  id="skills-heading"
+  className="
+    relative inline-block group
+    text-3xl md:text-5xl font-bold tracking-wide text-white
+    border border-white/20 rounded-lg px-6 py-3
+    overflow-hidden
+  "
+>
+  <span className="md:text-6xl text-3xl relative z-10 group-hover:text-black transition">
+    SKILLS & TECHNOLOGIES
+  </span>
+
+  <span
+    className="
+      absolute inset-0 bg-white
+      translate-y-full
+      transition-transform duration-500 ease-out
+      group-hover:translate-y-0
+    "
+  />
+</h2>
+
+      </header>
+
+      <div onMouseEnter={pause} onMouseLeave={resume} className="space-y-6">
+        {/* Row 1 */}
+        <div className="overflow-hidden">
+          <ul ref={row1Ref} className="flex w-max gap-6 px-4" role="list">
+            {duplicatedRow1.map((skill, index) => (
+              <SkillCard key={`row1-${index}`} skill={skill} />
             ))}
-          </div>
+          </ul>
+        </div>
+
+        {/* Row 2 */}
+        <div className="overflow-hidden">
+          <ul ref={row2Ref} className="flex w-max gap-6 px-4" role="list">
+            {duplicatedRow2.map((skill, index) => (
+              <SkillCard key={`row2-${index}`} skill={skill} />
+            ))}
+          </ul>
         </div>
       </div>
     </section>

@@ -2,115 +2,153 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaGithub, FaLinkedin, FaExternalLinkAlt } from "react-icons/fa";
-import { SiLeetcode, SiGooglecloud } from "react-icons/si";
 import { GoMail } from "react-icons/go";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    if (linksRef.current) {
-      gsap.fromTo(
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
+
+    tl.fromTo(
+      headingRef.current,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+    )
+      .fromTo(
+        textRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+        "-=0.4"
+      )
+      .fromTo(
         linksRef.current,
-        { opacity: 0, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: linksRef.current,
-            start: "top 80%",
-          },
-        }
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        "-=0.4"
+      )
+      .fromTo(
+        ctaRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.7)" },
+        "-=0.3"
       );
-    }
   }, []);
 
   return (
     <section
       ref={sectionRef}
       id="contact"
-      className="relative px-6 py-20 bg-[#0f0f0f] text-white overflow-hidden z-10"
+      aria-labelledby="contact-heading"
+      className="
+        relative py-24 px-6 bg-white text-black overflow-hidden
+        bg-[repeating-linear-gradient(to_right,#00000008,#00000008_1px,transparent_1px,transparent_60px)]
+      "
     >
-      <div className="absolute inset-0 bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px]" />
+      <main className="max-w-4xl mx-auto text-center">
 
-      <div className="max-w-3xl mx-auto text-center relative z-10">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6">Let’s Connect</h2>
-        <p className="text-gray-300 mb-12">
-          Feel free to reach out or follow me on the platforms below.
-        </p>
-
-        <div
-          ref={linksRef}
-          className="flex flex-wrap justify-center gap-6 items-center mb-12"
-        >
-          {/* LinkedIn */}
-          <a
-            href="https://www.linkedin.com/in/jainam-karania/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
+        {/* Heading */}
+        <header className="mb-10">
+          <h2
+            ref={headingRef}
+            id="contact-heading"
+            className="text-3xl md:text-5xl font-bold"
           >
-            <FaLinkedin className="text-blue-400 text-xl" />
-            LinkedIn
-          </a>
+            Let’s Connect
+          </h2>
 
-          {/* GitHub */}
-          <a
-            href="https://github.com/JainamKarania"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
+          <p
+            ref={textRef}
+            className="text-gray-600 mt-4 text-base md:text-lg max-w-2xl mx-auto"
           >
-            <FaGithub className="text-gray-300 text-xl" />
-            GitHub
-          </a>
+            I’m open to opportunities in AI/ML and frontend engineering.
+            Let’s collaborate, build, and create meaningful digital products.
+          </p>
+        </header>
 
-          {/* Google Cloud */}
-          <a
-            href="https://www.cloudskillsboost.google/public_profiles/b61436a3-89ab-4080-ab83-9372a7ecf586"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
+        {/* Social Links */}
+        <nav aria-label="Social media links">
+          <div
+            ref={linksRef}
+            className="flex flex-wrap justify-center gap-5 items-center mb-12"
           >
-            <SiGooglecloud className="text-yellow-300 text-xl" />
-            Google Cloud Skills Boost
-          </a>
+            <a
+              href="https://www.linkedin.com/in/jainam-karania/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex items-center gap-2 px-5 py-3
+                border border-black/20 rounded-lg
+                hover:bg-black hover:text-white
+                transition duration-300
+              "
+              aria-label="LinkedIn Profile"
+            >
+              <FaLinkedin className="text-xl" />
+              LinkedIn
+            </a>
 
-          {/* Leetcode */}
+            <a
+              href="https://github.com/JainamKarania"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex items-center gap-2 px-5 py-3
+                border border-black/20 rounded-lg
+                hover:bg-black hover:text-white
+                transition duration-300
+              "
+              aria-label="GitHub Profile"
+            >
+              <FaGithub className="text-xl" />
+              GitHub
+            </a>
+
+            <a
+              href="mailto:jainamkarania05@gmail.com"
+              className="
+                flex items-center gap-2 px-5 py-3
+                border border-black/20 rounded-lg
+                hover:bg-black hover:text-white
+                transition duration-300
+              "
+              aria-label="Email Jainam"
+            >
+              <GoMail className="text-xl" />
+              Email
+            </a>
+          </div>
+        </nav>
+
+        {/* CTA */}
+        <footer>
           <a
-            href="https://leetcode.com/u/JainamKarania/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
+            ref={ctaRef}
+            href="mailto:jainamkarania05@gmail.com"
+            className="
+              inline-flex items-center gap-2
+              bg-black text-white px-8 py-4
+              rounded-lg font-semibold
+              hover:scale-105 transition-transform duration-300
+            "
+            aria-label="Hire Jainam"
           >
-            <SiLeetcode className="text-orange-400 text-xl" />
-            LeetCode
+            Hire Me
+            <FaExternalLinkAlt />
           </a>
-
-          {/* Email */}
-          <a
-            href="mailto:your.jainamkarania05@gmail.com"
-            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-lg hover:bg-white/10 transition"
-          >
-            <GoMail className="text-xl" />
-            jainamkarania05@gmail.com
-          </a>
-        </div>
-
-        {/* Hire Me Button */}
-        <a
-          href="mailto:your.email@example.com"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-black font-semibold rounded-xl transition"
-        >
-          <FaExternalLinkAlt />
-          Hire Me
-        </a>
-      </div>
+        </footer>
+      </main>
     </section>
   );
 };

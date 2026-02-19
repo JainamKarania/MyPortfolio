@@ -1,6 +1,7 @@
 import About from "../components/About"
 import Certifications from "../components/Certifications"
 import Contact from "../components/Contact"
+import CTA from "../components/CTA"
 import Hero from "../components/Hero"
 import Navbar from "../components/Navbar"
 import Projects from "../components/Projects"
@@ -12,8 +13,9 @@ const Homepage = () => {
         <Navbar/>
         <Hero/>
         <About/>
-        <Skills/>
         <Projects/>
+        <CTA/>
+        <Skills/>
         <Certifications/>
         <Contact/>
         {/* Add more sections as needed */}

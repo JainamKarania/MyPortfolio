@@ -1,22 +1,20 @@
-import { useEffect, useRef, useState, type JSX } from "react";
+import { useState, useRef, useEffect, type JSX } from "react";
+import { FaReact, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { FaPython, FaWebflow } from "react-icons/fa6";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaReact, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import { SiJavascript, SiModal, SiNumpy, SiPandas, SiTailwindcss, SiTypescript } from "react-icons/si";
-import { FaPython, FaWebflow } from "react-icons/fa6";
-import { MdAnimation, MdSpeed } from "react-icons/md";
+
 import hand from "../assets/hand.jpg";
 import electric from "../assets/electric.jfif";
 import g_thumb from "../assets/g_thumb.png";
 import z_thumb from "../assets/z_thumb.png";
-import task from "../assets/task.jpg";
 import wonder from "../assets/wonder.jpg";
 import finance from "../assets/finance.avif";
-import img_g from "../assets/img_g.jpeg";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type Category = "personal" | "webflow" | "ai";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Project {
   id: string;
@@ -31,281 +29,237 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: "finance",
-    name: "Financial Report Summarization & KPI Extraction using NLP.",
-    image: finance,
-    category: "ai",
-    short: "NLP model to summarize financial reports and extract key KPIs.",
-    techStack: [
-      { name: "Python", icon: <FaPython /> },
-      { name: "NLP", icon: <MdSpeed /> },
-      { name: "Machine Learning", icon: <MdSpeed /> },
-      { name: "Pandas", icon: <SiPandas /> },
-      { name: "NumPy", icon: <SiNumpy /> },
-      { name: "Model Evaluation", icon: <SiModal /> },
-    ]
-  },
-  {
-    id:"image-generator",
-    name: "Imagify",
-    image: img_g,
-    category: "ai",
-    short: "AI-powered image generator use to create 2D and 3D images.",
-    techStack: [
-      { name: "React", icon: <FaReact /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
-      { name: "Tailwind", icon: <SiTailwindcss /> },  
-      { name: "Python", icon: <FaPython /> },
-      { name: "FastAPI", icon: <MdSpeed /> },
-    ],
-  },
-  {
-    id: "gemini",
-    name: "GForce AI",
-    image: g_thumb,
-    category: "ai",
-    short: "Responsive AI chatbot with streamed responses & FastAPI backend.",
-    techStack: [
-      { name: "React", icon: <FaReact /> },
-      { name: "JavaScript", icon: <SiJavascript /> },
-      { name: "Tailwind", icon: <SiTailwindcss /> },
-      { name: "Python", icon: <FaPython /> },
-      { name: "FastAPI", icon: <MdSpeed /> },
-    ],
-    liveLink: "https://gemini-clone-six-red.vercel.app/",
-    githubLink: "https://github.com/JainamKarania/gemini-clone",
-  },
-  {
-    id: "taskai",
-    name: "Task Assistant",
-    image: task,
+    id: "woi",
+    name: "Wonders of India",
+    image: wonder,
     category: "personal",
     short:
-      "Full-stack Task manager with reminders, history, and optimized UX (50% faster).",
-    techStack: [
-      { name: "React", icon: <FaReact /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
-      { name: "Tailwind", icon: <SiTailwindcss /> },
-    ],
-    liveLink: "https://github.com/JainamKarania/TaskAI_Assitant",
-    githubLink: "https://github.com/JainamKarania/TaskAI_Assitant",
-  },
-  {
-    id: "zebra",
-    name: "Zebra Learn",
-    image: z_thumb,
-    category: "webflow",
-    short: "Single-page Webflow site with polished animations and UX.",
-    techStack: [
-      { name: "Webflow", icon: <FaWebflow /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
-    ],
-    liveLink: "https://learning-site-66c1f3.webflow.io/",
+      "Travel blog built using React and Tailwind showcasing India’s destinations.",
+    techStack: [{ name: "React", icon: <FaReact /> }],
+    githubLink: "https://github.com/JainamKarania/Wonders-of-India",
+    liveLink: "https://wonders-of-india.vercel.app/",
   },
   {
     id: "harrison",
     name: "Harrison's Webflow Site",
     image: electric,
     category: "webflow",
-    short: "Elegant Webflow site with smooth animations and responsive design.",
-    techStack: [
-      { name: "Webflow", icon: <FaWebflow /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
-    ],
+    short: "Elegant Webflow website with clean UI.",
+    techStack: [{ name: "Webflow", icon: <FaWebflow /> }],
     liveLink: "https://www.harrisonforbeselectrical.com/",
   },
   {
-      id: "woi",
-      name: "Wonders of India",
-      image: wonder,
-      category: "personal",
-      short: "A travel blog website showcasing India's top destinations.",
-      techStack: [
-        { name: "React", icon: <FaReact /> },
-        { name: "JavaScript", icon: <SiJavascript /> },
-        { name: "Tailwind", icon: <SiTailwindcss /> },
-        {name: "GSAP", icon: <MdAnimation />},
-      ],
-      liveLink: "https://wonders-of-india.vercel.app/",
-      githubLink: "https://github.com/JainamKarania/Wonders-of-India"
+    id: "finance",
+    name: "Financial Report Summarization",
+    image: finance,
+    category: "ai",
+    short:
+      "NLP model summarizing financial reports and extracting KPIs using Python, Pandas, and NumPy.",
+    techStack: [{ name: "Python", icon: <FaPython /> }],
   },
   {
-      id: "personality-prediction",
-      name: "Personality Prediction System based on Graphology Using ML",
-      image: hand,
-      category: "ai",
-      short: "ML-based personality prediction from handwritten text with 90% accuracy.",
-      techStack: [
-        { name: "Python", icon: <FaPython /> },
-        { name: "Machine Learning", icon: <MdSpeed /> },
-      ],
-      githubLink: "",
-    },
-];
-
-const TAB_LIST: { key: "all" | Category; label: string }[] = [
-  { key: "all", label: "All Projects" },
-  { key: "personal", label: "Personal Projects" },
-  { key: "webflow", label: "Webflow Projects" },
-  { key: "ai", label: "AI/ML Projects" },
+    id: "zebra",
+    name: "Zebra Learn",
+    image: z_thumb,
+    category: "webflow",
+    short: "Modern Webflow site with smooth animations.",
+    techStack: [{ name: "Webflow", icon: <FaWebflow /> }],
+    liveLink: "https://learning-site-66c1f3.webflow.io/",
+  },
+  {
+    id: "gemini",
+    name: "GForce AI",
+    image: g_thumb,
+    category: "ai",
+    short: "AI chatbot built with React, Tailwind CSS, and FastAPI backend.",
+    techStack: [{ name: "React", icon: <FaReact /> }],
+    liveLink: "https://gemini-clone-six-red.vercel.app/",
+    githubLink: "https://github.com/JainamKarania/gemini-clone",
+  },
+  {
+    id: "personality",
+    name: "Personality Prediction System",
+    image: hand,
+    category: "ai",
+    short:
+      "ML model predicting personality traits from handwriting using Python.",
+    techStack: [{ name: "Python", icon: <FaPython /> }],
+  },
 ];
 
 const Projects = () => {
-  const [activeTab, setActiveTab] = useState<"all" | Category>("all");
-  const gridRef = useRef<HTMLDivElement | null>(null);
-  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
-  const filtered =
-    activeTab === "all"
-      ? projects
-      : projects.filter((p) => p.category === activeTab);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (headingRef.current) {
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 85%",
-          },
-        }
-      );
-    }
+    gsap.fromTo(
+      headingRef.current,
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 85%",
+        },
+      },
+    );
+  }, []);
 
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray(".project-card");
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 30, scale: 0.98 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power3.out",
-        }
-      );
-    }, gridRef);
-
-    return () => ctx.revert();
-  }, [activeTab]);
+  const visibleProjects = expanded ? projects : projects.slice(0, 4);
 
   return (
-    <section id="projects" className="py-20 relative z-10">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-black bg-[radial-gradient(#00fff022_1px,transparent_1px)] [background-size:24px_24px] z-0" />
+    <section
+      id="projects"
+      className="bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px] text-white py-12 sm:py-24"
+      aria-labelledby="projects-heading"
+    >
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <header className="flex flex-col items-start gap-1 mb-12">
+          <h4
+            ref={headingRef}
+            className="
+    relative inline-block group
+    text-white font-semibold text-xs sm:text-sm tracking-[0.35em] uppercase
+    border border-white/30 rounded-md px-5 py-2
+    cursor-pointer overflow-hidden
+    transition-all duration-300
+    hover:border-white mb-4
+  "
+          >
+            <span className="relative z-10 group-hover:text-black transition">
+              MY WORK
+            </span>
 
-      <div className="container max-w-7xl mx-auto px-4 relative z-10">
-        <h2
-          ref={headingRef}
-          className="text-xl md:text-4xl font-bold text-white mb-10"
-        >
-          My Projects
-        </h2>
+            <span
+              className="
+      absolute inset-0 bg-white
+      translate-y-full
+      transition-transform duration-300 ease-out
+      group-hover:translate-y-0
+    "
+            />
+          </h4>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-3 mb-8">
-          {TAB_LIST.map((t) => {
-            const active = activeTab === t.key;
-            return (
-              <button
-                key={t.key}
-                onClick={() => setActiveTab(t.key as any)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all backdrop-blur-md border
-                  ${
-                    active
-                      ? "bg-cyan-400/20 text-cyan-300 border-cyan-500/30"
-                      : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
-                  }`}
-              >
-                {t.label}
-              </button>
-            );
-          })}
-        </div>
+          <h2
+            id="projects-heading"
+            className="
+    relative inline-block group
+    text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-white
+    border border-white/20 rounded-lg px-6 py-3
+    overflow-hidden
+  "
+          >
+            <span className="md:text-6xl text-3xl relative z-10 group-hover:text-black transition">
+              PROJECTS
+            </span>
 
-        {/* Project Grid */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {filtered.map((project) => (
-            <div
+            <span
+              className="
+      absolute inset-0 bg-white
+      translate-y-full
+      transition-transform duration-500 ease-out
+      group-hover:translate-y-0
+    "
+            />
+          </h2>
+        </header>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {visibleProjects.map((project) => (
+            <article
               key={project.id}
-              className="project-card relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-xl shadow-[0_0_20px_rgba(0,255,255,0.15)] hover:shadow-[0_0_25px_rgba(0,255,255,0.3)] hover:scale-[1.02] transition-all duration-500"
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition hover:border-white/20 hover:bg-white/10"
             >
               {/* Image */}
-              <div className="relative h-48 w-full overflow-hidden">
+              <figure className="relative">
                 <img
                   src={project.image}
                   alt={project.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-64 sm:h-72 md:h-80 object-cover transition duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                <div className="absolute top-3 right-3 flex gap-2">
-                  {project.githubLink && (
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2 bg-black/40 backdrop-blur-sm rounded-lg text-white text-sm hover:bg-black/70 transition"
-                      title="GitHub"
-                    >
-                      <FaGithub />
-                    </a>
-                  )}
-                  {project.liveLink && (
-                    <a
-                      href={project.liveLink}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2 bg-black/40 backdrop-blur-sm rounded-lg text-white text-sm hover:bg-black/70 transition"
-                      title="Live"
-                    >
-                      <FaExternalLinkAlt />
-                    </a>
-                  )}
-                </div>
-              </div>
 
-              {/* Content */}
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-white">
+                {/* Title overlay */}
+                <figcaption className="pointer-events-none absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-0">
+                  <h3 className="text-lg sm:text-xl font-semibold">
+                    {project.name}
+                  </h3>
+                </figcaption>
+              </figure>
+
+              {/* Reveal Panel */}
+              <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-black/95 p-5 sm:p-6 flex flex-col gap-4">
+                <h3 className="text-base sm:text-lg font-semibold">
                   {project.name}
                 </h3>
-                <p className="text-gray-300 text-sm mt-2">{project.short}</p>
 
-                {/* Tech Stack - shows fully, fades slightly on hover */}
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {project.techStack.map((t, i) => (
-                    <div
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {project.short}
+                </p>
+
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {project.techStack.map((skill, i) => (
+                    <span
                       key={i}
-                      className="flex items-center gap-1 text-xs bg-white/10 border border-white/10 rounded-md px-2 py-1 text-cyan-200 hover:bg-white/20 transition"
-                      title={t.name}
+                      className="px-3 py-1 rounded-full border border-white/20 bg-white/10 text-xs flex items-center gap-1 transition transform hover:-translate-y-0.5 hover:bg-white hover:text-black"
                     >
-                      <span className="text-sm">{t.icon}</span>
-                      <span className="hidden sm:inline">{t.name}</span>
-                    </div>
+                      {skill.icon}
+                      {skill.name}
+                    </span>
                   ))}
                 </div>
 
-                {/* Category tag */}
-                <div className="mt-4">
-                  <span className="inline-block px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-300 text-xs font-semibold border border-cyan-500/30">
-                    {project.category.toUpperCase()}
-                  </span>
-                </div>
+                {/* Links */}
+                {(project.githubLink || project.liveLink) && (
+                  <nav className="flex flex-wrap gap-3 mt-2">
+                    {project.githubLink && (
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 flex items-center gap-2 text-sm font-medium"
+                      >
+                        <FaGithub />
+                        GitHub
+                      </a>
+                    )}
+
+                    {project.liveLink && (
+                      <a
+                        href={project.liveLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 flex items-center gap-2 text-sm font-medium"
+                      >
+                        <FaExternalLinkAlt />
+                        Live
+                      </a>
+                    )}
+                  </nav>
+                )}
               </div>
-            </div>
+            </article>
           ))}
         </div>
+
+        {/* View More / Less */}
+        {projects.length > 4 && (
+          <div className="flex justify-center mt-12 sm:mt-14">
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="px-7 py-3 border border-white/20 rounded-full bg-white/5 hover:bg-white/10 transition text-sm font-semibold tracking-wide focus:outline-none focus:ring-2 focus:ring-white/40"
+            >
+              {expanded ? "View Less" : "View More"}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

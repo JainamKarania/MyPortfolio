@@ -1,47 +1,58 @@
 import { useEffect, useRef } from "react";
-import { FaGithub, FaLinkedin, FaReact } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const paragraphRef = useRef<HTMLParagraphElement>(null);
-  const iconsRef = useRef<HTMLDivElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
+  const jainamRef = useRef<HTMLHeadingElement>(null);
+  const karaniaRef = useRef<HTMLHeadingElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const animateIn = (element: Element | null, delay = 0) => {
-      if (!element) return;
-      gsap.fromTo(
-        element,
-        { opacity: 0, y: 50, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1,
-          delay,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-          },
-        }
-      );
-    };
+    const ctx = gsap.context(() => {
+      // Intro reveal
+      gsap.from([jainamRef.current, karaniaRef.current], {
+        y: 70,
+        opacity: 0,
+        duration: 1.1,
+        stagger: 0.15,
+        ease: "power4.out",
+      });
 
-    animateIn(headingRef.current, 0);
-    animateIn(paragraphRef.current, 0.2);
-    animateIn(iconsRef.current, 0.4);
-    animateIn(buttonsRef.current, 0.6);
+      // Scroll split responsive distance
+      const moveDistance =
+        window.innerWidth < 640
+          ? 40
+          : window.innerWidth < 1024
+          ? 90
+          : 160;
 
-    if (bgRef.current) {
+      gsap.to(jainamRef.current, {
+        x: -moveDistance,
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top center",
+          end: "+=400",
+          scrub: true,
+        },
+      });
+
+      gsap.to(karaniaRef.current, {
+        x: moveDistance,
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top center",
+          end: "+=400",
+          scrub: true,
+        },
+      });
+
+      // Background parallax
       gsap.to(bgRef.current, {
-        y: -100,
+        y: -60,
         ease: "none",
         scrollTrigger: {
           trigger: bgRef.current,
@@ -50,89 +61,150 @@ const Hero = () => {
           scrub: true,
         },
       });
-    }
+    });
+
+    return () => ctx.revert();
   }, []);
 
-  // Smooth scroll helper
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Parallax Star Background */}
+    <header className="relative min-h-screen mt-6 bg-black flex items-center justify-center overflow-hidden">
+      {/* Background */}
       <div
         ref={bgRef}
-        className="absolute inset-0 bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px] z-0"
+        aria-hidden
+        className="absolute inset-0 bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px]"
       />
 
-      {/* Foreground Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl">
-        <div className="flex items-center justify-center mb-4">
-          <FaReact
-            style={{ animation: "spin 4s linear infinite" }}
-            className="w-12 h-12 p-2 bg-white text-blue-700 rounded-full shadow-lg"
-          />
-        </div>
+      {/* Wrapper */}
+      <div
+        ref={wrapperRef}
+        className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10"
+      >
+        {/* Name */}
+        <h1 className="text-white font-extrabold tracking-tight leading-[0.9] text-center mx-auto max-w-[1200px]">
+          <span
+            ref={jainamRef}
+            className="
+              block
+              text-4xl
+              sm:text-6xl
+              md:text-8xl
+              lg:text-[10rem]
+              xl:text-[14rem]
+            "
+          >
+            JAINAM
+          </span>
 
-        <h1
-          ref={headingRef}
-          className="text-white text-4xl md:text-6xl font-bold max-w-xl mx-auto"
-        >
-          Welcome to my Portfolio
+          <span
+            ref={karaniaRef}
+            className="
+              block
+              text-4xl
+              sm:text-6xl
+              md:text-8xl
+              lg:text-[10rem]
+              xl:text-[14rem]
+            "
+          >
+            KARANIA
+          </span>
         </h1>
 
-        <p
-          ref={paragraphRef}
-          className="text-gray-300 text-lg md:text-xl max-w-xl mx-auto mt-6 mb-8"
+        {/* Bottom Section */}
+        <section
+          className="
+            mt-10 md:mt-14
+            grid
+            grid-cols-1
+            md:grid-cols-3
+            gap-8
+            items-center
+            text-white
+          "
         >
-          Passionate Engineer focused on solving real-world problems through
-          code.
-        </p>
+          {/* Contact */}
+          <address
+            className="
+              not-italic
+              text-sm sm:text-base md:text-lg
+              text-center md:text-left
+              md:justify-self-start
+            "
+          >
+            Lets Connect :
+            <div className="text-gray-300 mt-1 break-all">
+              jainamkarania05@gmail.com
+            </div>
+          </address>
 
-        <div
-          ref={iconsRef}
-          className="flex justify-center gap-6 text-white text-2xl mb-8"
-        >
-          <a
-            href="https://www.linkedin.com/in/jainam-karania/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-400 transition duration-300"
-          >
-            <FaLinkedin />
-          </a>
-          <a
-            href="https://github.com/JainamKarania"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-gray-400 transition duration-300"
-          >
-            <FaGithub />
-          </a>
-        </div>
+          {/* CTA */}
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+            <a
+              href="#projects"
+              className="
+                px-5 py-2.5 sm:px-6 sm:py-3
+                rounded-full
+                bg-white
+                text-black
+                text-sm sm:text-base
+                font-medium
+                hover:scale-105
+                transition
+              "
+            >
+              View Work
+            </a>
 
-        {/* Buttons */}
-        <div ref={buttonsRef} className="flex justify-center gap-6">
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="px-6 py-3 bg-gradient-to-r from-sky-500 to-cyan-700  rounded-xl font-semibold shadow-lg transition duration-300 transform hover:scale-105"
+            <a
+              href="/Jainamkarania_Resume.pdf"
+              download
+              className="
+                px-5 py-2.5 sm:px-6 sm:py-3
+                rounded-full
+                border
+                border-white
+                text-white
+                text-sm sm:text-base
+                hover:bg-white hover:text-black
+                transition
+              "
+            >
+              Download Resume
+            </a>
+          </div>
+
+          {/* Social */}
+          <nav
+            className="
+              flex
+              justify-center md:justify-end
+              gap-5 sm:gap-6
+            "
           >
-            Let's Connect
-          </button>
-          <a
-            href="/Jainamkarania_Resume.pdf"
-            download="Jainamkarania_Resume.pdf"
-            className="px-6 py-3 border-2 border-cyan-400 hover:border-cyan-500 hover:text-cyan-700 rounded-xl font-semibold shadow-lg transition duration-300 transform hover:scale-105"
-          >
-            Download Resume
-          </a>
-        </div>
+            <a
+              href="https://github.com/JainamKarania"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="hover:text-gray-400 transition"
+            >
+              <FaGithub className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10" />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/jainam-karania/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="hover:text-blue-400 transition"
+            >
+              <FaLinkedin className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10" />
+            </a>
+          </nav>
+        </section>
       </div>
-    </section>
+    </header>
   );
 };
 

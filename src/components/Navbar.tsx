@@ -12,14 +12,14 @@ const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Certifications", href: "#certificate" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", id: "about" },
+    { name: "Projects", id: "projects" },
+    { name: "Certifications", id: "certificate" },
+    { name: "Contact", id: "contact" },
   ];
 
   const handleSmoothScroll = (targetId: string) => {
-    const targetElement = document.querySelector(targetId);
+    const targetElement = document.getElementById(targetId);
     if (targetElement) {
       gsap.to(window, {
         duration: 1,
@@ -41,14 +41,17 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <ul className="hidden md:flex space-x-6 font-medium">
             {navItems.map((item) => (
-              <li key={item.name}>
-                <button
-                  onClick={() => handleSmoothScroll(item.href)}
-                  className="hover:text-cyan-300 transition duration-300"
-                >
-                  {item.name}
-                </button>
-              </li>
+              <button
+                key={item.name}
+                onClick={() =>
+                  document.getElementById(item.id)?.scrollIntoView({
+                    behavior: "smooth",
+                  })
+                }
+                className="text-white hover:text-gray-300 transition"
+              >
+                {item.name}
+              </button>
             ))}
           </ul>
 
@@ -67,7 +70,7 @@ const Navbar = () => {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => handleSmoothScroll(item.href)}
+                onClick={() => handleSmoothScroll(item.id)}
                 className="block text-white text-lg hover:text-cyan-300 transition duration-300 text-left w-full"
               >
                 {item.name}
