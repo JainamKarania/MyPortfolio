@@ -120,7 +120,7 @@ const About = () => {
         "
       >
         <span className="relative z-10 group-hover:text-black transition">
-          INTRO.
+          INTRO
         </span>
 
         <span
@@ -145,7 +145,7 @@ const About = () => {
         "
       >
         <span className="relative z-10 group-hover:text-black transition">
-          ABOUT ME.
+          ABOUT ME
         </span>
 
         <span
