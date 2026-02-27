@@ -150,7 +150,7 @@ export default function Experience(): JSX.Element {
 
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold">
-                    Frontend Developer | PureConnectt Technologies
+                    Frontend Developer | PureConnectt
                   </h3>
                   <p className="text-sm text-gray-400 mt-1">
                     Ankleshwar | On-site | Oct 2024 – Feb 2025

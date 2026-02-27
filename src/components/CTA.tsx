@@ -34,44 +34,18 @@ const CTA = () => {
         bg-[repeating-linear-gradient(to_right,#00000008,#00000008_1px,transparent_1px,transparent_60px)]
       "
     >
-      <div className="max-w-4xl mx-auto text-center space-y-6">
-        <header>
+      <div className=" container max-w-7xl mx-auto text-center space-y-6">
+        {/* <header>
           <h2 id="cta-heading" className="text-3xl md:text-5xl font-bold">
             Let’s Work Together
           </h2>
-        </header>
-
-        <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-          I have experience building responsive frontend applications using
-          React and Webflow, and I’m currently seeking opportunities as a
-          fresher in the AI/ML domain where I can learn, contribute, and grow.
+        </header> */}
+        <div className="flex items-center justify-center w-full">
+        <p className="text-gray-600 text-base md:text-3xl max-w-2xl leading-relaxed">
+          I bring a strong foundation in frontend development and a passion for learning new technologies. If you have an opportunity that aligns with my skills and aspirations, I’d love to connect and explore how I can contribute to your team.
         </p>
-
-        <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-          <button
-            className="border border-black px-8 py-3 rounded-md
-              hover:bg-black hover:text-white
-              transition duration-300 font-medium"
-            onClick={() =>
-              document.getElementById("contact")?.scrollIntoView({
-                behavior: "smooth",
-              })
-            }
-          >
-            Contact Me
-          </button>
-
-          {/* <a
-            href="/resume.pdf"
-            className="
-              border border-black px-8 py-3 rounded-md
-              hover:bg-black hover:text-white
-              transition duration-300 font-medium
-            "
-          >
-            View Resume
-          </a> */}
         </div>
+        
       </div>
     </section>
   );
