@@ -114,7 +114,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px] text-white py-12 sm:py-24"
+      className="bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] bg-size-[20px_20px] text-white py-12 sm:py-24"
       aria-labelledby="projects-heading"
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">
@@ -186,7 +186,7 @@ const Projects = () => {
                 />
 
                 {/* Title overlay */}
-                <figcaption className="pointer-events-none absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-0">
+                <figcaption className="pointer-events-none absolute bottom-0 left-0 right-0 p-5 bg-linear-to-t from-black/90 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-0">
                   <h3 className="text-lg sm:text-xl font-semibold">
                     {project.name}
                   </h3>

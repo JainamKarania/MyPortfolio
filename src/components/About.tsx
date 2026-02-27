@@ -102,7 +102,7 @@ const About = () => {
     <section id="about" className="relative py-12 overflow-hidden" aria-labelledby="about-heading">
       <div
         ref={bgRef}
-        className="absolute inset-0 bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px] z-0"
+        className="absolute inset-0 bg-black bg-[radial-gradient(#ffffff22_1px,transparent_1px)] bg-size-[20px_20px] z-0"
       />
 
       <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-0">

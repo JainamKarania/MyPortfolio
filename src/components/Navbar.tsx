@@ -31,10 +31,10 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 w-full max-w-[1320px] z-50 px-4">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 w-full max-w-330 z-50 px-4">
       <nav className="p-4 shadow-xl shadow-sky-800/30 border border-sky-700/30 backdrop-blur-sm rounded-2xl">
         <div className="flex justify-between items-center text-white">
-          <div className="text-xl md:text-2xl font-bold tracking-wide bg-gradient-to-r from-sky-300 to-cyan-400 bg-clip-text text-transparent">
+          <div className="text-xl md:text-2xl font-bold tracking-wide bg-linear-to-r from-sky-300 to-cyan-400 bg-clip-text text-transparent">
             Jainam Karania Portfolio
           </div>
 

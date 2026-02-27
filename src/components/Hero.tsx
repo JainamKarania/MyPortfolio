@@ -72,16 +72,16 @@ const Hero = () => {
       <div
         ref={bgRef}
         aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(#ffffff22_1px,transparent_1px)] [background-size:20px_20px]"
+        className="absolute inset-0 bg-[radial-gradient(#ffffff22_1px,transparent_1px)] bg-size-[20px_20px]"
       />
 
       {/* Wrapper */}
       <div
         ref={wrapperRef}
-        className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10"
+        className="relative z-10 w-full max-w-350 mx-auto px-4 sm:px-6 md:px-10"
       >
         {/* Name */}
-        <h1 className="text-white font-extrabold tracking-tight leading-[0.9] text-center mx-auto max-w-[1200px]">
+        <h1 className="text-white font-extrabold tracking-tight leading-[0.9] text-center mx-auto max-w-300">
           <span
             ref={jainamRef}
             className="
@@ -140,21 +140,26 @@ const Hero = () => {
 
           {/* CTA */}
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            <a
-              href="#projects"
-              className="
-                px-5 py-2.5 sm:px-6 sm:py-3
-                rounded-full
-                bg-white
-                text-black
-                text-sm sm:text-base
-                font-medium
-                hover:scale-105
-                transition
-              "
-            >
-              View Work
-            </a>
+            <button
+  onClick={() => {
+    document.getElementById("projects")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }}
+  className="
+    px-5 py-2.5 sm:px-6 sm:py-3
+    rounded-full
+    bg-white
+    text-black
+    text-sm sm:text-base
+    font-medium
+    hover:scale-105
+    transition
+  "
+>
+  View Work
+</button>
 
             <a
               href="/Jainamkarania_Resume.pdf"
