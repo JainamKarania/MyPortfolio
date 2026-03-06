@@ -11,6 +11,9 @@ import g_thumb from "../assets/g_thumb.png";
 import z_thumb from "../assets/z_thumb.png";
 import wonder from "../assets/wonder.jpg";
 import finance from "../assets/finance.avif";
+import boltz from "../assets/image.png";
+import { SiJavascript, SiMysql, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { MdAnimation, MdStorage } from "react-icons/md";
 
 type Category = "personal" | "webflow" | "ai";
 
@@ -29,13 +32,24 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: "boltzshift",
+    name: "BoltzShift Portfolio",
+    image: boltz,
+    category: "personal",
+    short:
+      "Company's portfolio built with React and Tailwind showcasing my projects and skills.",
+    techStack: [{ name: "React", icon: <FaReact /> }, { name: "Tailwind CSS", icon: <SiTailwindcss /> },{name: "Typescript", icon: <SiTypescript />}, {name:"GSAP", icon: <MdAnimation />}],
+    githubLink: "https://github.com/JainamKarania/BoltzShift-Portfolio",
+    liveLink: "https://boltzshift-portfolio.vercel.app/",
+  },
+  {
     id: "woi",
     name: "Wonders of India",
     image: wonder,
     category: "personal",
     short:
       "Travel blog built using React and Tailwind showcasing India’s destinations.",
-    techStack: [{ name: "React", icon: <FaReact /> }],
+    techStack: [{ name: "React", icon: <FaReact /> }, { name: "Tailwind CSS", icon: <SiTailwindcss /> }, {name: "JavaScript", icon: <SiJavascript />}, {name:"GSAP", icon: <MdAnimation />}, {name:"MySQL", icon: <SiMysql />}, {name:"API Integration", icon: <MdStorage />}],
     githubLink: "https://github.com/JainamKarania/Wonders-of-India",
     liveLink: "https://wonders-of-india.vercel.app/",
   },
