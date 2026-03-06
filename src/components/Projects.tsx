@@ -43,6 +43,16 @@ const projects: Project[] = [
     liveLink: "https://boltzshift-portfolio.vercel.app/",
   },
   {
+    id: "finance",
+    name: "Financial Report Summarization",
+    image: finance,
+    category: "ai",
+    short:
+      "NLP model summarizing financial reports and extracting KPIs using Python, Pandas, and NumPy.",
+    techStack: [{ name: "Python", icon: <FaPython /> }],
+    githubLink: "https://github.com/JainamKarania/financial-report-summarization"
+  },
+  {
     id: "woi",
     name: "Wonders of India",
     image: wonder,
@@ -61,15 +71,6 @@ const projects: Project[] = [
     short: "Elegant Webflow website with clean UI.",
     techStack: [{ name: "Webflow", icon: <FaWebflow /> }],
     liveLink: "https://www.harrisonforbeselectrical.com/",
-  },
-  {
-    id: "finance",
-    name: "Financial Report Summarization",
-    image: finance,
-    category: "ai",
-    short:
-      "NLP model summarizing financial reports and extracting KPIs using Python, Pandas, and NumPy.",
-    techStack: [{ name: "Python", icon: <FaPython /> }],
   },
   {
     id: "zebra",
