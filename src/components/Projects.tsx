@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import hand from "../assets/hand.jpg";
-import electric from "../assets/electric.jfif";
+// import electric from "../assets/electric.jfif";
 import g_thumb from "../assets/g_thumb.png";
 import z_thumb from "../assets/z_thumb.png";
 import wonder from "../assets/wonder.jpg";
