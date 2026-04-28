@@ -1,19 +1,21 @@
 import { useState, useRef, useEffect, type JSX } from "react";
 import { FaReact, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import { FaPython, FaWebflow } from "react-icons/fa6";
+import { FaMeta, FaPython } from "react-icons/fa6";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import hand from "../assets/hand.jpg";
+// import hand from "../assets/hand.jpg";
+import ai_schedule from "../assets/AI_schedule.png";
 // import electric from "../assets/electric.jfif";
 import g_thumb from "../assets/g_thumb.png";
-import z_thumb from "../assets/z_thumb.png";
+// import z_thumb from "../assets/z_thumb.png";
 import wonder from "../assets/wonder.jpg";
 import finance from "../assets/finance.avif";
 import boltz from "../assets/image.png";
-import { SiJavascript, SiMysql, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiGooglegemini, SiJavascript, SiLangchain, SiMysql, SiTailwindcss, SiTypescript } from "react-icons/si";
 import { MdAnimation, MdStorage } from "react-icons/md";
+import { RiAiGenerate } from "react-icons/ri";
 
 type Category = "personal" | "webflow" | "ai";
 
@@ -31,6 +33,33 @@ interface Project {
 }
 
 const projects: Project[] = [
+  // {
+  //   id: "Bilingual Voice AI Agent",
+  //   name: "Bilingual Voice AI Agent",
+  //   image: "",
+  //   category: "ai",
+  //   short: "An AI Agent that can understand and respond in both English and Hindi, providing a seamless bilingual conversational experience.",
+  //   techStack: [{ name: "Python", icon: <FaPython /> }, { name: "FastAPI", icon: <MdStorage /> }, { name: "React", icon: <FaReact /> }, { name: "Tailwind CSS", icon: <SiTailwindcss /> }, { name: "Ollama", icon: <FaMeta /> }, { name: "LangChain", icon: <SiLangchain /> },{ name: "TypeScript", icon: <SiTypescript />}],
+  // },
+  {
+    id: "AI Scheduler",
+    name: "AI Scheduler",
+    image: ai_schedule,
+    category: "ai",
+    short: "An AI Agent that works as a personal scheduler that organizes tasks and optimizes time management.",
+    techStack: [{ name: "Python", icon: <FaPython />},{ name: "FastAPI", icon: <MdStorage /> },{ name: "React", icon: <FaReact /> }, { name: "Tailwind CSS", icon: <SiTailwindcss /> }, { name: "Ollama", icon: <FaMeta /> }, { name: "LangChain", icon: <SiLangchain /> },{ name: "TypeScript", icon: <SiTypescript />}],
+    githubLink: "https://github.com/JainamKarania/scheduler_chatbot",
+  },
+  {
+    id: "gemini",
+    name: "GForce AI",
+    image: g_thumb,
+    category: "ai",
+    short: "AI chatbot built with React, Tailwind CSS, and Gemini API, featuring Retrieval-Augmented Generation (RAG) for enhanced responses.",
+    techStack: [{ name: "React", icon: <FaReact /> }, { name: "Tailwind CSS", icon: <SiTailwindcss /> },{ name: "JavaScript", icon: <SiJavascript />}, { name: "Gemini API", icon: <SiGooglegemini /> },{name: "RAG", icon: <RiAiGenerate />}],
+    liveLink: "https://gemini-clone-six-red.vercel.app/",
+    githubLink: "https://github.com/JainamKarania/gemini-clone",
+  },
   {
     id: "boltzshift",
     name: "BoltzShift Portfolio",
@@ -72,34 +101,6 @@ const projects: Project[] = [
   //   techStack: [{ name: "Webflow", icon: <FaWebflow /> }],
   //   liveLink: "https://www.harrisonforbeselectrical.com/",
   // },
-  {
-    id: "zebra",
-    name: "Zebra Learn",
-    image: z_thumb,
-    category: "webflow",
-    short: "Modern Webflow site with smooth animations.",
-    techStack: [{ name: "Webflow", icon: <FaWebflow /> }],
-    liveLink: "https://learning-site-66c1f3.webflow.io/",
-  },
-  {
-    id: "gemini",
-    name: "GForce AI",
-    image: g_thumb,
-    category: "ai",
-    short: "AI chatbot built with React, Tailwind CSS, and FastAPI backend.",
-    techStack: [{ name: "React", icon: <FaReact /> }],
-    liveLink: "https://gemini-clone-six-red.vercel.app/",
-    githubLink: "https://github.com/JainamKarania/gemini-clone",
-  },
-  {
-    id: "personality",
-    name: "Personality Prediction System",
-    image: hand,
-    category: "ai",
-    short:
-      "ML model predicting personality traits from handwriting using Python.",
-    techStack: [{ name: "Python", icon: <FaPython /> }],
-  },
 ];
 
 const Projects = () => {
